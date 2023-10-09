@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Rand</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">atl.g48982.jeu2048.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Rand (atl.g48982.jeu2048.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Rand</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (34/ 34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package atl.g48982.jeu2048.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.Arrays;
+<i>5</i>&nbsp;import java.util.Collections;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Objects;
+<i>8</i>&nbsp;import java.util.Random;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * This class puts random numbers in an array of numbers
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; * @author Jules
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;public class Rand {
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public static final int TWO = 2;
+<i>18</i>&nbsp;    public static final int FOUR = 4;
+<i>19</i>&nbsp;    private final Random random;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Default constructor.
+<i>23</i>&nbsp;     */
+<b class="fc"><i>24</i>&nbsp;    public Rand() {</b>
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;        random = new Random();</b>
+<i>27</i>&nbsp;
+<b class="fc"><i>28</i>&nbsp;    }</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * Checks if an array of integers has at least one number equal to zero.
+<i>32</i>&nbsp;     *
+<i>33</i>&nbsp;     * @param numbers the array to evaluate.
+<i>34</i>&nbsp;     * @return true if it contains at least one zero false otherwise.
+<i>35</i>&nbsp;     */
+<i>36</i>&nbsp;    boolean hasfreeSpots(int[] numbers) {
+<i>37</i>&nbsp;        
+<b class="fc"><i>38</i>&nbsp;        Objects.requireNonNull(numbers);</b>
+<b class="fc"><i>39</i>&nbsp;        return Arrays.stream(numbers).anyMatch(p -&gt; p == 0);</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    /**
+<i>45</i>&nbsp;     * Finds all rows containing at least oneZero.
+<i>46</i>&nbsp;     *
+<i>47</i>&nbsp;     * @param squares the array to check.
+<i>48</i>&nbsp;     * @return the list of free rows.
+<i>49</i>&nbsp;     */
+<i>50</i>&nbsp;    ArrayList&lt;Integer&gt; freeRows(int[][] squares) {
+<i>51</i>&nbsp;        
+<b class="fc"><i>52</i>&nbsp;        Objects.requireNonNull(squares);</b>
+<b class="fc"><i>53</i>&nbsp;        ArrayList&lt;Integer&gt; freeLines = new ArrayList&lt;&gt;();</b>
+<i>54</i>&nbsp;
+<b class="fc"><i>55</i>&nbsp;        for (int i = 0; i &lt; squares.length; i++) {</b>
+<i>56</i>&nbsp;
+<b class="fc"><i>57</i>&nbsp;            if (hasfreeSpots(squares[i])) {</b>
+<i>58</i>&nbsp;
+<b class="fc"><i>59</i>&nbsp;                freeLines.add(i);</b>
+<i>60</i>&nbsp;            }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;        }
+<i>63</i>&nbsp;
+<b class="fc"><i>64</i>&nbsp;        if (!freeLines.isEmpty()) {</b>
+<i>65</i>&nbsp;
+<b class="fc"><i>66</i>&nbsp;            Collections.shuffle(freeLines);</b>
+<i>67</i>&nbsp;        }
+<b class="fc"><i>68</i>&nbsp;        return freeLines;</b>
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * Gets A Rand column number from a row that contains zeros.
+<i>74</i>&nbsp;     *
+<i>75</i>&nbsp;     * @param row the row number to pick a column from.
+<i>76</i>&nbsp;     * @param squares the 2D array of numbers.
+<i>77</i>&nbsp;     * @return a column number from that row.
+<i>78</i>&nbsp;     */
+<i>79</i>&nbsp;    private int columnSelected(int row, int[][] squares) {
+<i>80</i>&nbsp;
+<b class="fc"><i>81</i>&nbsp;         Objects.requireNonNull(squares);</b>
+<b class="fc"><i>82</i>&nbsp;        ArrayList&lt;Integer&gt; columnselected = new ArrayList&lt;&gt;();</b>
+<i>83</i>&nbsp;
+<b class="fc"><i>84</i>&nbsp;        for (int col = 0; col &lt; squares[row].length; col++) {</b>
+<i>85</i>&nbsp;
+<b class="fc"><i>86</i>&nbsp;            if (squares[row][col] == 0) {</b>
+<i>87</i>&nbsp;
+<b class="fc"><i>88</i>&nbsp;                columnselected.add(col);</b>
+<i>89</i>&nbsp;            }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;        }
+<i>92</i>&nbsp;
+<b class="fc"><i>93</i>&nbsp;        Collections.shuffle(columnselected);</b>
+<i>94</i>&nbsp;
+<b class="fc"><i>95</i>&nbsp;        return columnselected.get(0);</b>
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    /**
+<i>100</i>&nbsp;     * Selects one value amongst the candidates to be added to the array.
+<i>101</i>&nbsp;     *
+<i>102</i>&nbsp;     * @return either of one value choices.
+<i>103</i>&nbsp;     */
+<i>104</i>&nbsp;    private int value() {
+<i>105</i>&nbsp;
+<b class="fc"><i>106</i>&nbsp;        int select = random.nextInt(2);</b>
+<b class="fc"><i>107</i>&nbsp;        if (select == 0) {</b>
+<b class="fc"><i>108</i>&nbsp;            return TWO;</b>
+<i>109</i>&nbsp;        }
+<i>110</i>&nbsp;
+<b class="fc"><i>111</i>&nbsp;        return FOUR;</b>
+<i>112</i>&nbsp;    }
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    /**
+<i>115</i>&nbsp;     * Fills a list with a maximum of two values.
+<i>116</i>&nbsp;     *
+<i>117</i>&nbsp;     * @param squares the array containing the numbers.
+<i>118</i>&nbsp;     * @return the list wich can be either empty,have one or two values.
+<i>119</i>&nbsp;     */
+<i>120</i>&nbsp;    public List&lt;Integer&gt; spot(int[][] squares) {
+<i>121</i>&nbsp;        
+<b class="fc"><i>122</i>&nbsp;        Objects.requireNonNull(squares);</b>
+<i>123</i>&nbsp;        int rowSelected;
+<i>124</i>&nbsp;        int colSelected;
+<i>125</i>&nbsp;        int choice;
+<b class="fc"><i>126</i>&nbsp;        choice = value();</b>
+<b class="fc"><i>127</i>&nbsp;        ArrayList&lt;Integer&gt; squareSelected = new ArrayList&lt;&gt;();</b>
+<i>128</i>&nbsp;
+<b class="fc"><i>129</i>&nbsp;        if (!freeRows(squares).isEmpty()) {</b>
+<i>130</i>&nbsp;
+<b class="fc"><i>131</i>&nbsp;            rowSelected = freeRows(squares).get(0);</b>
+<i>132</i>&nbsp;
+<b class="fc"><i>133</i>&nbsp;            squareSelected.add(rowSelected);</b>
+<i>134</i>&nbsp;
+<b class="fc"><i>135</i>&nbsp;            colSelected = columnSelected(rowSelected, squares);</b>
+<b class="fc"><i>136</i>&nbsp;            squareSelected.add(colSelected);</b>
+<b class="fc"><i>137</i>&nbsp;            squareSelected.add(choice);</b>
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;        }
+<i>140</i>&nbsp;
+<b class="fc"><i>141</i>&nbsp;        return squareSelected;</b>
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-07 14:27</div>
+</div>
+</body>
+</html>

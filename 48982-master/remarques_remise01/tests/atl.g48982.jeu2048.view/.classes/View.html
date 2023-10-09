@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: View</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">atl.g48982.jeu2048.view</a> ]
+</div>
+
+<h1>Coverage Summary for Class: View (atl.g48982.jeu2048.view)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">View</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package atl.g48982.jeu2048.view;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * This class interacts with the user.It collects input from user and displays
+<i>5</i>&nbsp; * the game state in the console
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; * @author jules
+<i>8</i>&nbsp; */
+<b class="nc"><i>9</i>&nbsp;public class View {</b>
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    /**
+<i>12</i>&nbsp;     * Displays an error message to inform the player that some invalid input
+<i>13</i>&nbsp;     * has been detected.
+<i>14</i>&nbsp;     */
+<i>15</i>&nbsp;    public void displayErrorMessage() {
+<i>16</i>&nbsp;
+<b class="nc"><i>17</i>&nbsp;        System.out.println(&quot;Your selection is invalid.Try AGAIN!&quot;);</b>
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Displays the Game score.
+<i>23</i>&nbsp;     *
+<i>24</i>&nbsp;     * @param score,the current score.
+<i>25</i>&nbsp;     */
+<i>26</i>&nbsp;    public void displayScore(int score) {
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;        System.out.println(&quot;your score is : &quot; + score + &quot;.\n&quot;);</b>
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Displays the board on the console.
+<i>34</i>&nbsp;     *
+<i>35</i>&nbsp;     * @param array being to be displayed.
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    public void displayBoard(int[][] array) {
+<i>38</i>&nbsp;
+<b class="nc"><i>39</i>&nbsp;        for (int[] ints : array) {</b>
+<i>40</i>&nbsp;
+<b class="nc"><i>41</i>&nbsp;            for (int j = 0; j &lt; ints.length; j++) {</b>
+<i>42</i>&nbsp;
+<b class="nc"><i>43</i>&nbsp;                if (j == ints.length - 1) {</b>
+<i>44</i>&nbsp;
+<b class="nc"><i>45</i>&nbsp;                    System.out.printf(&quot; %4d%n&quot;, ints[j]);</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;                } else {
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;                    System.out.printf(&quot; %4d&quot;, ints[j]);</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;                }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;            }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;        }
+<i>56</i>&nbsp;
+<b class="nc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    /**
+<i>60</i>&nbsp;     * Displays guidance information to the player to play a round.
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    public void displayInfo() {
+<i>63</i>&nbsp;
+<b class="nc"><i>64</i>&nbsp;        System.out.println(&quot;1-PRESS ONE TO MOVE RIGHT&quot;);</b>
+<b class="nc"><i>65</i>&nbsp;        System.out.println(&quot;2-PRESS TWO TO MOVE LEFT&quot;);</b>
+<b class="nc"><i>66</i>&nbsp;        System.out.println(&quot;3-PRESS THREE TO MOVE UP&quot;);</b>
+<b class="nc"><i>67</i>&nbsp;        System.out.println(&quot;4-PRESS FOUR TO MOVE DOWN&quot;);</b>
+<i>68</i>&nbsp;
+<b class="nc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    /**
+<i>72</i>&nbsp;     * Displays a message at the end of the Game.
+<i>73</i>&nbsp;     *
+<i>74</i>&nbsp;     * @param score the score at the end of the game.
+<i>75</i>&nbsp;     */
+<i>76</i>&nbsp;    public void endMessage(int score) {
+<i>77</i>&nbsp;
+<b class="nc"><i>78</i>&nbsp;        System.out.println(&quot;The Game is over.&quot;);</b>
+<i>79</i>&nbsp;
+<b class="nc"><i>80</i>&nbsp;        if (score == 2048) {</b>
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;            System.out.println(&quot;CONGRATULATIONS YOU WON!&quot;);</b>
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;        } else {
+<i>85</i>&nbsp;
+<b class="nc"><i>86</i>&nbsp;            System.out.println(&quot;Sorry,YOU DID NOT WIN THIS TIME !&quot;);</b>
+<i>87</i>&nbsp;        }
+<i>88</i>&nbsp;
+<b class="nc"><i>89</i>&nbsp;    }</b>
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    /**
+<i>92</i>&nbsp;     * Displays a welcome message on the Board.
+<i>93</i>&nbsp;     */
+<i>94</i>&nbsp;    public void welcome() {
+<i>95</i>&nbsp;
+<b class="nc"><i>96</i>&nbsp;        System.out.print(&quot;\nWELCOME TO 2048 GAME!\n&quot;);</b>
+<b class="nc"><i>97</i>&nbsp;    }</b>
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-25 16:17</div>
+</div>
+</body>
+</html>

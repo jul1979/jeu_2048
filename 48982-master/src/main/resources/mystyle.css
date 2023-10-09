@@ -1,0 +1,116 @@
+
+
+.button{
+    
+ -fx-background-color:#101357; 
+ -fx-text-fill:white;
+ -fx-font-weight:BOLD; 
+ -fx-font-size:20;
+ -fx-pref-height:100;
+ -fx-pref-width:200;
+}
+     
+
+#mybuttons{
+    
+  -fx-spacing:15;
+}
+  
+    
+
+#mylistview{
+    
+-fx-pref-width:500;
+    
+}
+
+#topcontainer{
+    
+     -fx-spacing:10;
+     -fx-translate-x:100;
+     -fx-translate-y:50;
+ }
+
+.mybox{
+    
+-fx-height:100;
+-fx-width:100;
+-fx-stroke-width: 5;
+-fx-stroke:#FFEBCD;
+-fx-fill:#F5DEB3;
+-fx-arc-height:3.5;
+-fx-arc-width:3.5;
+
+    
+}
+
+#gridandlist{
+    
+ -fx-spacing:10;  
+    
+}
+
+#mynumber{
+
+    -fx-font-family:Western;
+    -fx-font-size:18; 
+    -fx-font-weight:BOLD; 
+   
+}
+
+#mygridpane{
+    -fx-grid-lines-visible:true;    
+}
+
+#two{  
+    -fx-fill:#87ceeb; 
+   
+}
+
+#four{  
+ -fx-fill: #fa8072; 
+   
+}
+
+
+#eight{  
+   -fx-fill: #ffc0cb; 
+}
+
+
+#sixteen{  
+ -fx-fill:#afeeee; 
+}
+
+#threetwo{  
+  -fx-fill:#ffa500; 
+}
+
+#sixfour{  
+    -fx-fill:#40e0d0; 
+}
+
+#onetwoeight{  
+    -fx-fill: #ffff00; 
+}
+
+#twofivesix{  
+ -fx-fill: #f0e68c; 
+}
+
+#fiveonetwo{  
+-fx-fill:#7fffd4; 
+}
+
+#tentwofour{  
+   -fx-fill:#ff00ff; 
+}
+
+#maximum{  
+   -fx-fill: #00ff00; 
+}
+
+#zero{  
+   -fx-fill:#F5DEB3; 
+}
+

@@ -1,0 +1,88 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Model</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">atl.g48982.jeu2048.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Model (atl.g48982.jeu2048.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Model</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package atl.g48982.jeu2048.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * This is an Interface.
+<i>5</i>&nbsp; *
+<i>6</i>&nbsp; * @author Jules
+<i>7</i>&nbsp; */
+<i>8</i>&nbsp;public interface Model {
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    /**
+<i>11</i>&nbsp;     * Checks if the current game round is finished.
+<i>12</i>&nbsp;     *
+<i>13</i>&nbsp;     * @return true if one square has a number equal to 2048 or no numbers can
+<i>14</i>&nbsp;     * be moved in either of the four possible directions.
+<i>15</i>&nbsp;     */
+<i>16</i>&nbsp;    boolean isOver();
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    /**
+<i>19</i>&nbsp;     * moves numbers in the way provided by direction.
+<i>20</i>&nbsp;     *
+<i>21</i>&nbsp;     * @param dir the way to move to amongst UP,DOWN LEFT OR RIGHT.
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    void play(Direction dir);
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * Gets the score at any given time.
+<i>27</i>&nbsp;     *
+<i>28</i>&nbsp;     * @return the score for the current game.
+<i>29</i>&nbsp;     */
+<i>30</i>&nbsp;    int score();
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Adds a number from one of two predefined multiple of two. In this case a
+<i>34</i>&nbsp;     * two or four to the board if at least one number has moved from its
+<i>35</i>&nbsp;     * previous position and the board is not full.
+<i>36</i>&nbsp;     *
+<i>37</i>&nbsp;     * @param numbersBefore the array of numbers before a play.
+<i>38</i>&nbsp;     */
+<i>39</i>&nbsp;    void addNumberToBoard(int[][] numbersBefore);
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-25 16:17</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Game</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">atl.g48982.jeu2048.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Game (atl.g48982.jeu2048.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Game</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.3%
+  </span>
+  <span class="absValue">
+    (11/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.6%
+  </span>
+  <span class="absValue">
+    (38/ 49)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package atl.g48982.jeu2048.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.beans.PropertyChangeListener;
+<i>4</i>&nbsp;import java.beans.PropertyChangeSupport;
+<i>5</i>&nbsp;import java.util.Arrays;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;import java.util.Objects;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; * This class englobes the game elements.
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; * @author Jules
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public class Game implements Model {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private final Board board;
+<i>17</i>&nbsp;    private final Rand generator;
+<i>18</i>&nbsp;    private boolean arrayChanged;
+<i>19</i>&nbsp;    private PropertyChangeSupport support;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Default constructor
+<i>23</i>&nbsp;     */
+<b class="fc"><i>24</i>&nbsp;    public Game() {</b>
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;        this.board = new Board();</b>
+<b class="fc"><i>27</i>&nbsp;        this.generator = new Rand();</b>
+<b class="fc"><i>28</i>&nbsp;        this.arrayChanged = false;</b>
+<b class="fc"><i>29</i>&nbsp;        this.support = new PropertyChangeSupport(board);</b>
+<b class="fc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Accessor for arrayChanged.
+<i>34</i>&nbsp;     *
+<i>35</i>&nbsp;     * @return true if numbers has changed false otherwise.
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    public boolean isArrayChanged() {
+<i>38</i>&nbsp;
+<b class="nc"><i>39</i>&nbsp;        return arrayChanged;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * gets the game status.
+<i>44</i>&nbsp;     *
+<i>45</i>&nbsp;     * @return true if the game has been won false otherwise.
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    @Override
+<i>48</i>&nbsp;    public boolean gameWon() {
+<b class="fc"><i>49</i>&nbsp;        return isOver() &amp;&amp; magicNumber();</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * Accessor for Board.
+<i>54</i>&nbsp;     *
+<i>55</i>&nbsp;     * @return the board of the game.
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    public Board getBoard() {
+<i>58</i>&nbsp;
+<b class="fc"><i>59</i>&nbsp;        return board;</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    /**
+<i>63</i>&nbsp;     * Gets the array of numbers.
+<i>64</i>&nbsp;     *
+<i>65</i>&nbsp;     * @return the array depicting the numbers on the Board.
+<i>66</i>&nbsp;     */
+<i>67</i>&nbsp;    public int[][] numbers() {
+<i>68</i>&nbsp;
+<b class="fc"><i>69</i>&nbsp;        return board.getNumbers();</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * moves numbers in the way provided by direction.
+<i>74</i>&nbsp;     *
+<i>75</i>&nbsp;     * @param direction the way to move to amongst UP,DOWN LEFT OR RIGHT.
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    @Override
+<i>78</i>&nbsp;    public void play(Direction direction) {
+<i>79</i>&nbsp;
+<b class="fc"><i>80</i>&nbsp;        Objects.requireNonNull(direction);</b>
+<b class="fc"><i>81</i>&nbsp;        arrayChanged = false;</b>
+<b class="fc"><i>82</i>&nbsp;        int[][] copyNumbers = copy(this.numbers());</b>
+<b class="fc"><i>83</i>&nbsp;        board.moveAll(direction);</b>
+<b class="fc"><i>84</i>&nbsp;        addNumberToBoard(copyNumbers);</b>
+<i>85</i>&nbsp;
+<b class="fc"><i>86</i>&nbsp;    }</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    /**
+<i>89</i>&nbsp;     * Gets the score at any given time.
+<i>90</i>&nbsp;     *
+<i>91</i>&nbsp;     * @return the score for the current game.
+<i>92</i>&nbsp;     */
+<i>93</i>&nbsp;    @Override
+<i>94</i>&nbsp;    public int score() {
+<b class="fc"><i>95</i>&nbsp;        return board.getScore();</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    /**
+<i>99</i>&nbsp;     * Checks if the current game round is finished.
+<i>100</i>&nbsp;     *
+<i>101</i>&nbsp;     * @return true if one square has a number equal to 2048 or no numbers can
+<i>102</i>&nbsp;     * be moved in either of the four possible directions.
+<i>103</i>&nbsp;     */
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public boolean isOver() {
+<i>106</i>&nbsp;
+<b class="fc"><i>107</i>&nbsp;        return magicNumber() || ((board.isFull()) &amp;&amp; (!board.twinsHorizontal() &amp;&amp; !board.twinsVertical()));</b>
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    /**
+<i>112</i>&nbsp;     * Checks if the &quot;magic&quot; number has been reached.
+<i>113</i>&nbsp;     *
+<i>114</i>&nbsp;     * @return true if one square has a number 2048 false otherwise.
+<i>115</i>&nbsp;     */
+<i>116</i>&nbsp;    private boolean magicNumber() {
+<i>117</i>&nbsp;
+<b class="fc"><i>118</i>&nbsp;        long count = Arrays.stream(numbers()).flatMapToInt(Arrays::stream)</b>
+<b class="fc"><i>119</i>&nbsp;                .takeWhile(p -&gt; p != 2048)</b>
+<b class="fc"><i>120</i>&nbsp;                .count();</b>
+<i>121</i>&nbsp;
+<b class="fc"><i>122</i>&nbsp;        return (count != numbers().length * numbers()[0].length);</b>
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    /**
+<i>127</i>&nbsp;     * Adds a number from one of two predefined multiple of two. In this case a
+<i>128</i>&nbsp;     * two or four to the board if at least one number has moved from its
+<i>129</i>&nbsp;     * previous position and the board is not full.
+<i>130</i>&nbsp;     *
+<i>131</i>&nbsp;     * @param numbersBefore the array of numbers before a play.
+<i>132</i>&nbsp;     */
+<i>133</i>&nbsp;    @Override
+<i>134</i>&nbsp;    public void addNumberToBoard(int[][] numbersBefore) {
+<i>135</i>&nbsp;
+<b class="fc"><i>136</i>&nbsp;        Objects.requireNonNull(numbersBefore);</b>
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;        boolean same;
+<i>139</i>&nbsp;
+<b class="fc"><i>140</i>&nbsp;        same = numberHasMoved(numbersBefore, numbers());</b>
+<i>141</i>&nbsp;
+<b class="fc"><i>142</i>&nbsp;        if (!same) {</b>
+<i>143</i>&nbsp;
+<b class="fc"><i>144</i>&nbsp;            arrayChanged = true;</b>
+<i>145</i>&nbsp;        }
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;        List&lt;Integer&gt; coordinates;
+<i>148</i>&nbsp;
+<b class="fc"><i>149</i>&nbsp;        coordinates = generator.spot(board.getNumbers());</b>
+<i>150</i>&nbsp;
+<b class="fc"><i>151</i>&nbsp;        if (!same &amp;&amp; coordinates.size() == 3) {</b>
+<i>152</i>&nbsp;
+<b class="fc"><i>153</i>&nbsp;            board.setNumber(coordinates.get(0), coordinates.get(1), coordinates.get(2));</b>
+<b class="fc"><i>154</i>&nbsp;            this.support.firePropertyChange(&quot;numbers&quot;, numbersBefore, numbers());</b>
+<i>155</i>&nbsp;        }
+<i>156</i>&nbsp;
+<b class="fc"><i>157</i>&nbsp;    }</b>
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    /**
+<i>160</i>&nbsp;     * Checks if two bi-dimensional Arrays are equal.
+<i>161</i>&nbsp;     *
+<i>162</i>&nbsp;     * @param numbersBefore the first array of integers.
+<i>163</i>&nbsp;     * @param numbersAfter the second array of integers.
+<i>164</i>&nbsp;     * @return true if they are equal false otherwise.
+<i>165</i>&nbsp;     */
+<i>166</i>&nbsp;    private boolean numberHasMoved(int[][] numbersBefore, int[][] numbersAfter) {
+<i>167</i>&nbsp;
+<b class="fc"><i>168</i>&nbsp;        Objects.requireNonNull(numbersBefore);</b>
+<b class="fc"><i>169</i>&nbsp;        Objects.requireNonNull(numbersAfter);</b>
+<i>170</i>&nbsp;
+<b class="fc"><i>171</i>&nbsp;        return Arrays.deepEquals(numbersBefore, numbersAfter);</b>
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;    }
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;    /**
+<i>176</i>&nbsp;     * Helper method to make a copy of an array.
+<i>177</i>&nbsp;     *
+<i>178</i>&nbsp;     * @param numbersToCopy the array to make a copy of.
+<i>179</i>&nbsp;     * @return a copy of the array.
+<i>180</i>&nbsp;     */
+<i>181</i>&nbsp;    public static int[][] copy(int[][] numbersToCopy) {
+<i>182</i>&nbsp;
+<b class="fc"><i>183</i>&nbsp;        Objects.requireNonNull(numbersToCopy);</b>
+<i>184</i>&nbsp;
+<b class="fc"><i>185</i>&nbsp;        final int[][] res = new int[numbersToCopy.length][];</b>
+<i>186</i>&nbsp;
+<b class="fc"><i>187</i>&nbsp;        for (int i = 0; i &lt; numbersToCopy.length; i++) {</b>
+<i>188</i>&nbsp;
+<b class="fc"><i>189</i>&nbsp;            res[i] = Arrays.copyOf(numbersToCopy[i], numbersToCopy[i].length);</b>
+<i>190</i>&nbsp;        }
+<b class="fc"><i>191</i>&nbsp;        return res;</b>
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    }
+<i>194</i>&nbsp;
+<i>195</i>&nbsp;    /**
+<i>196</i>&nbsp;     * adds an observer to the list of observers.
+<i>197</i>&nbsp;     *
+<i>198</i>&nbsp;     * @param listener the observer to add.
+<i>199</i>&nbsp;     */
+<i>200</i>&nbsp;    public void addPropertyChangeListener(PropertyChangeListener listener) {
+<b class="nc"><i>201</i>&nbsp;        support.addPropertyChangeListener(listener);</b>
+<b class="nc"><i>202</i>&nbsp;    }</b>
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;    /**
+<i>205</i>&nbsp;     * removes an observer to the list of observers.
+<i>206</i>&nbsp;     *
+<i>207</i>&nbsp;     * @param listener the observer to remove.
+<i>208</i>&nbsp;     */
+<i>209</i>&nbsp;    public void removePropertyChangeListener(PropertyChangeListener listener) {
+<b class="nc"><i>210</i>&nbsp;        support.removePropertyChangeListener(listener);</b>
+<b class="nc"><i>211</i>&nbsp;    }</b>
+<i>212</i>&nbsp;
+<i>213</i>&nbsp;    /**
+<i>214</i>&nbsp;     * Sets the various elements to begin a game round to initial states.
+<i>215</i>&nbsp;     */
+<i>216</i>&nbsp;    public void initNewGame() {
+<i>217</i>&nbsp;
+<b class="nc"><i>218</i>&nbsp;        for (int[] array : this.numbers()) {</b>
+<i>219</i>&nbsp;
+<b class="nc"><i>220</i>&nbsp;            for (int a : array) {</b>
+<i>221</i>&nbsp;
+<b class="nc"><i>222</i>&nbsp;                a = 0;</b>
+<i>223</i>&nbsp;            }
+<i>224</i>&nbsp;
+<i>225</i>&nbsp;        }
+<i>226</i>&nbsp;
+<b class="nc"><i>227</i>&nbsp;        this.arrayChanged = false;</b>
+<i>228</i>&nbsp;
+<b class="nc"><i>229</i>&nbsp;        this.board.initBoard();</b>
+<i>230</i>&nbsp;
+<b class="nc"><i>231</i>&nbsp;    }</b>
+<i>232</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-07 14:27</div>
+</div>
+</body>
+</html>
